@@ -1,0 +1,8 @@
+# 应用端口
+server:
+  port: 8010
+
+# 应用名称
+spring:
+  application:
+    name: client1
