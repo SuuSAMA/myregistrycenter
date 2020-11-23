@@ -15,7 +15,8 @@ import lombok.Getter;
 public enum MethodType {
     // 注册服务
     REGISTER("REGISTER"),
-    KEEP_ALIVE("KEEP_ALIVE");
+    KEEP_ALIVE("KEEP_ALIVE"),
+    QUERY_SERVER("QUERY_SERVER");
 
     private String content;
 

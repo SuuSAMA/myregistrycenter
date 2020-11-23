@@ -14,6 +14,7 @@ public class RegistryClientInitializer extends ChannelInitializer<SocketChannel>
         pipeline.addLast(new LineBasedFrameDecoder(1024));
         pipeline.addLast(new StringDecoder());
         pipeline.addLast(new StringEncoder());
+        pipeline.addLast(new RegistryClientHandler());
         pipeline.addLast(new KeepAliveHandler());
     }
 }

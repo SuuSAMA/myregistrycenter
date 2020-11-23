@@ -22,13 +22,30 @@ public class RegistryHandler extends SimpleChannelInboundHandler<String> {
     protected void channelRead0(ChannelHandlerContext ctx,String msg) throws Exception {
         RpcStruct rpcStruct = RpcStruct.init(msg, ctx);
 
-        Server server = new Server();
-        server.setServerIp(rpcStruct.getServerIp());
-        server.setServerPort(rpcStruct.getServerPort());
-        server.setServerAddr(rpcStruct.getServerAddr());
-
-        registry.register(rpcStruct.getServerName(), server);
-        System.out.println(rpcStruct.getServerAddr() + " register to registry center.");
+        switch (rpcStruct.getMethodType()){
+            case REGISTER:
+                Server server = new Server();
+                server.setServerIp(rpcStruct.getServerIp());
+                server.setServerPort(rpcStruct.getServerPort());
+                server.setServerAddr(rpcStruct.getServerAddr());
+                ctx.channel().writeAndFlush(MethodType.REGISTER
+                        .getContent() + CustomConstant.SPACE + "ok" + CustomConstant.LINEFEED);
+                registry.register(rpcStruct.getServerName(), server);
+                System.out.println(rpcStruct.getServerAddr() + " register to registry center.");
+                break;
+            case KEEP_ALIVE:
+                System.out.println(rpcStruct.getServerAddr() + " keep alive");
+                ctx.channel().writeAndFlush(MethodType.KEEP_ALIVE
+                        .getContent() + CustomConstant.SPACE + "ok" + CustomConstant.LINEFEED);
+                break;
+            case QUERY_SERVER:
+                System.out.println(rpcStruct.getServerAddr() + " query server");
+                String serverStr = registry.obtainServerAddrs(rpcStruct.getServerName());
+                ctx.channel().writeAndFlush(MethodType.QUERY_SERVER
+                        .getContent() + CustomConstant.SPACE + serverStr + CustomConstant.LINEFEED);
+                break;
+            default:
+        }
     }
 
 }

@@ -25,10 +25,13 @@ public class RegistryHeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-
         IdleStateEvent event = (IdleStateEvent) evt;
 
-        if (event.state() == IdleState.ALL_IDLE){
+        if (event.state() == IdleState.READER_IDLE){
+            System.out.println("reader idle");
+        } else if (event.state() == IdleState.WRITER_IDLE){
+            System.out.println("writer idle");
+        } else if (event.state() == IdleState.ALL_IDLE){
             InetSocketAddress inetSocketAddress = (InetSocketAddress)ctx.channel().remoteAddress();
             String serverIp = inetSocketAddress.getHostString();
             int port = inetSocketAddress.getPort();

@@ -1,5 +1,7 @@
 package com.theialeo.center.core;
 
+import com.alibaba.fastjson.JSONArray;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +39,10 @@ public class ServerGroup {
         String serverAddr = serverAddrs.get(nowIndex);
         nowIndex++;
         return servers.get(serverAddr);
+    }
+
+    public String getServerAddrs(){
+        return JSONArray.toJSONString(serverAddrs);
     }
 
     public void addServer(Server server){

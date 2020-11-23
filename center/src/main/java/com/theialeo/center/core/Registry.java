@@ -55,9 +55,9 @@ public class Registry implements Registrable{
     }
 
     @Override
-    public String obtainServerAddr(String serverName) {
+    public String obtainServerAddrs(String serverName) {
         ServerGroup serverGroup = serverDefinitionMap.get(serverName);
-        return serverGroup.pollingServer().getServerAddr();
+        return serverGroup.getServerAddrs();
     }
 
     private static class SingleRegistry{

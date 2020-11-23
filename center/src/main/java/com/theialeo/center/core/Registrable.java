@@ -15,6 +15,6 @@ public interface Registrable {
 
     String getServerName(String serverAddr);
 
-    String obtainServerAddr(String serverName);
+    String obtainServerAddrs(String serverName);
 
 }

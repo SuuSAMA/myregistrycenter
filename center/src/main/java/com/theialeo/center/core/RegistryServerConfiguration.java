@@ -15,12 +15,9 @@ public class RegistryServerConfiguration {
 
     @Bean
     public RegistryServer registryServer(){
-        return new RegistryServer();
-    }
-
-    @Bean
-    public Registry registry(){
-        return new Registry();
+        RegistryServer registryServer = new RegistryServer();
+        registryServer.start();
+        return registryServer;
     }
 
 }

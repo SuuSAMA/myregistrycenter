@@ -7,8 +7,9 @@ package com.theialeo.client1.core;
  * @date 2020/11/20 20:59
  * @description
  */
-public interface SendService<E> {
+public interface RegisterService<E> {
 
     public void send(E element);
 
+    public String queryServerAddrs();
 }

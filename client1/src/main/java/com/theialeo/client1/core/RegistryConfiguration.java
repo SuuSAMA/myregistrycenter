@@ -15,8 +15,9 @@ public class RegistryConfiguration {
 
     @Bean
     public RegistryClient registryClient(){
-        return new RegistryClient();
-
+        RegistryClient registryClient = new RegistryClient();
+        registryClient.start();
+        return registryClient;
     }
 
 }
